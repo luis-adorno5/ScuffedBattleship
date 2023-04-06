@@ -24,7 +24,8 @@ function fillArray(arr){
             arr[i][j] = {
                 id: count,
                 isShip: false,
-                isShot: false
+                isShot: false,
+                ship: {}
             };
             count++;
         }
@@ -108,7 +109,8 @@ function computerMove(){
 
     if(!cell.isShot) {
         cell.isShot = true;
-        playerTurn = true; 
+        playerTurn = true;
+        document.getElementById(cell.id).innerHTML = "X";
         console.log("The computer made a move!");  
     }
 }
