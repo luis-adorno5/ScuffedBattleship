@@ -4,14 +4,6 @@ let playerTurn = true;
 let playerGrid = [];
 let computerGrid = [];
 
-// class Cell {
-//     constructor(id, isShip, isShot){
-//         this.id = id;
-//         this.isShip = isShip;
-//         this.isShot = isShot;
-//     }
-// }
-
 function initialize2DArray(cols, rows){
     var arr = new Array(cols);
     for(var i = 0; i<arr.length; i++){
@@ -52,11 +44,12 @@ function displayBoard(){
 }
 
 function onPlayerTouch(id){
-    if(id == 1){
-        console.log("Ship destroyed!");
-    }else{
-        console.log("Touched element with id: " + id);
-    }
+    document.getElementById(id).disabled = true;
+    console.log("Touched element with id: " + id);
+}
+
+function checkCell(id){
+
 }
 
 function initializeGame(){
