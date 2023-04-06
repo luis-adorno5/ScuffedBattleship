@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    letter-spacing: .3vmin;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+header {
+    font-size: 6vmin;
+}
+
+h1 {
+    font-size: 3vmin;
+    font-weight: 400;
+    font-style: oblique;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+    
+    
+
+}
+.gridBoard {
+    margin: 2vmin;
+    display: grid;
+    background-color: rgb(68, 182, 221);
+    grid-template-columns: repeat(10, 4.6vmin);
+    grid-template-rows: repeat(10, 4.6vmin);
+}
+.gridBoard .square {
+    border: .1vmin solid lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4.5vmin;
+}
+
+.ship {
+    background-color: grey;
+}
+
+button {
+    font-size: 2.5vmin;
+    margin: 5px 0 5px  0;
+    border: 1px solid darkgrey;
+    border-radius: 30%;
+}
+
+#fire {
+    color: gray;
+}
+
+#fire:hover { 
+    color: black;
+    background-color: red;
+
+}
