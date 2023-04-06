@@ -29,7 +29,6 @@ function fillArray(arr){
             count++;
         }
     }
-    console.log(arr);
     return arr;
 }
 
@@ -51,6 +50,7 @@ function displayBoard(){
 function onPlayerTouch(id){
     if(playerTurn == true){
         checkCell(id);
+        console.log("The computer made a move!");
     }else{
         console.log("It is not your turn!");
     }
@@ -61,10 +61,11 @@ function checkCell(id){
         for(var j = 0; j<computerGrid[i].length; j++){
             let cell = computerGrid[i][j];
             if(id == cell.id){
-                if(cell.isShot == false){
-                    cell.isShot = true;
+                if(cell.isShot == true){
+                    console.log("You have already shot this cell, select another one!");
                 }else{
-                    console.log("You have already shot this cell.");
+                    cell.isShot == true;
+                    playerTurn = false;
                 }
             }
         }
@@ -90,10 +91,15 @@ window.onload = () => {
 function update(){
     if(!isGameOver){
         if(!playerTurn){
-            console.log("Computers Turn!");
+            computerMove();
         }
     }
     else{ 
         clearInterval(loop);
     }
+}
+
+function computerMove(){
+    console.log("The computer made a move!");
+    playerTurn = true;
 }
