@@ -1,13 +1,24 @@
 let cols = 10;
 let rows = 10;
+let playerTurn = true;
 let playerGrid = [];
 let computerGrid = [];
 
 function initialize2DArray(cols, rows){
     var arr = new Array(cols);
     for(var i = 0; i<arr.length; i++){
-        arr[0] = new Array(rows);
+        arr[i] = new Array(rows);
     }
+    return fillArray(arr);
+}
+
+function fillArray(arr){
+    for(var i = 0; i<arr.length; i++){
+        for(var j = 0; j<arr[i].length; j++){
+            arr[i][j] = 0;
+        }
+    }
+    console.log(arr);
     return arr;
 }
 
@@ -21,14 +32,19 @@ function displayBoard(){
         var opponentSquare = document.createElement("div");
         opponentSquare.className = "square";
         opponentSquare.id = i;
+        opponentSquare.setAttribute("onclick", "onPlayerTouch(this.id);");
         document.getElementById('OpponentBoard').appendChild(opponentSquare);
     }
 }
 
-function initializeBoard(){
+function onPlayerTouch(id){
+    console.log("Touched element with id: " + id);
+}
+
+function initializeGame(){
     playerGrid = initialize2DArray(cols, rows);
     computerGrid = initialize2DArray(cols, rows);
     displayBoard();
 }
 
-initializeBoard();
+initializeGame();
