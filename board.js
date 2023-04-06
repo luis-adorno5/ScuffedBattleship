@@ -24,8 +24,7 @@ function fillArray(arr){
             arr[i][j] = {
                 id: count,
                 isShip: false,
-                isShot: false,
-                ship: {}
+                isShot: false
             };
             count++;
         }
@@ -35,12 +34,12 @@ function fillArray(arr){
 
 function displayBoard(){
     for(var i = 1; i<cols*rows+1; i++){
-        var playerSquare = document.createElement("div");
+        let playerSquare = document.createElement("div");
         playerSquare.className = "square";
         playerSquare.id = i;
         document.getElementById('PlayerBoard').appendChild(playerSquare);
 
-        var opponentSquare = document.createElement("div");
+        let opponentSquare = document.createElement("div");
         opponentSquare.className = "square";
         opponentSquare.id = i;
         opponentSquare.setAttribute("onclick", "onPlayerTouch(this.id);");
@@ -108,7 +107,7 @@ function computerMove(){
     let cell = playerGrid[randomRow][randomColumn];
 
     if(!cell.isShot) {
-        cell.isShot = true;
+        playerGrid[randomRow][randomColumn] = true;
         playerTurn = true;
         document.getElementById(cell.id).innerHTML = "X";
         console.log("The computer made a move!");  
