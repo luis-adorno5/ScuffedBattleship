@@ -51,8 +51,6 @@ function displayBoard(){
 function onPlayerTouch(id){
     if(playerTurn == true){
         checkCell(id);
-        playerTurn = false;
-        console.log("The player made a move!");
     }else{
         console.log("It is not your turn!");
     }
@@ -66,7 +64,9 @@ function checkCell(id){
                 if(cell.isShot == true){
                     console.log("You have already shot this cell, select another one!");
                 }else{
-                    cell.isShot == true;
+                    playerTurn = false;
+                    computerGrid[i][j].isShot = true;
+                    console.log("The player made a move!");
                 }
             }
         }
