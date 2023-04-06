@@ -7,6 +7,7 @@ let computerShips = 5;
 let playerGrid = [];
 let computerGrid = [];
 
+let isGameOver = false;
 
 function initialize2DArray(cols, rows){
     var arr = new Array(cols);
@@ -48,8 +49,11 @@ function displayBoard(){
 }
 
 function onPlayerTouch(id){
-    console.log("Touched element with id: " + id);
-    checkCell(id);
+    if(playerTurn == true){
+        checkCell(id);
+    }else{
+        console.log("It is not your turn!");
+    }
 }
 
 function checkCell(id){
@@ -74,6 +78,8 @@ function initializeGame(){
 }
 
 initializeGame();
+
+//Start of the Game Loop
 window.onload = () => {
     console.log("Game Loop!");
     loop = setInterval(() => {
@@ -82,5 +88,12 @@ window.onload = () => {
 };
 
 function update(){
-    console.log("Updating");
+    if(!isGameOver){
+        if(!playerTurn){
+            console.log("Computers Turn!");
+        }
+    }
+    else{ 
+        clearInterval(loop);
+    }
 }
