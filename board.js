@@ -44,7 +44,9 @@ function displayBoard(){
 }
 
 function onPlayerTouch(id){
-    document.getElementById(id).disabled = true;
+    document.querySelector('#OpponentBoard')
+    .querySelector('#1')
+    .hidden = true;
     console.log("Touched element with id: " + id);
 }
 
