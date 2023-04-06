@@ -50,7 +50,8 @@ function displayBoard(){
 function onPlayerTouch(id){
     if(playerTurn == true){
         checkCell(id);
-        console.log("The computer made a move!");
+        playerTurn = false;
+        console.log("The player made a move!");
     }else{
         console.log("It is not your turn!");
     }
@@ -65,7 +66,6 @@ function checkCell(id){
                     console.log("You have already shot this cell, select another one!");
                 }else{
                     cell.isShot == true;
-                    playerTurn = false;
                 }
             }
         }
@@ -92,14 +92,30 @@ function update(){
     if(!isGameOver){
         if(!playerTurn){
             computerMove();
+        } else if(playerShips == 0 || computerShips == 0){
+            isGameOver = true;
         }
     }
-    else{ 
+    else { 
         clearInterval(loop);
     }
 }
 
 function computerMove(){
-    console.log("The computer made a move!");
-    playerTurn = true;
+    let randomRow = Math.floor(Math.random() * rows);
+    let randomColumn = Math.floor(Math.random() * cols);
+    let cell = playerGrid[randomRow][randomColumn];
+
+    if(!cell.isShot) {
+        cell.isShot = true;
+        playerTurn = true; 
+        console.log("The computer made a move!");  
+    }
 }
+
+/* 
+    [0 0 0 1 1 1 1]
+    [0 0 0 0 0 0 0]
+    [0 0 0 0 0 0 0]
+    [0 0 0 0 0 0 0]
+*/
