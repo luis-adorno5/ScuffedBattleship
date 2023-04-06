@@ -1,8 +1,12 @@
+let fps = 60;
 let cols = 10;
 let rows = 10;
 let playerTurn = true;
+let playerShips = 5;
+let computerShips = 5;
 let playerGrid = [];
 let computerGrid = [];
+
 
 function initialize2DArray(cols, rows){
     var arr = new Array(cols);
@@ -44,14 +48,23 @@ function displayBoard(){
 }
 
 function onPlayerTouch(id){
-    document.querySelector('#OpponentBoard')
-    .querySelector('#1')
-    .hidden = true;
     console.log("Touched element with id: " + id);
+    checkCell(id);
 }
 
 function checkCell(id){
-
+    for(var i = 0; i<computerGrid.length; i++){
+        for(var j = 0; j<computerGrid[i].length; j++){
+            let cell = computerGrid[i][j];
+            if(id == cell.id){
+                if(cell.isShot == false){
+                    cell.isShot = true;
+                }else{
+                    console.log("You have already shot this cell.");
+                }
+            }
+        }
+    }
 }
 
 function initializeGame(){
@@ -61,3 +74,13 @@ function initializeGame(){
 }
 
 initializeGame();
+window.onload = () => {
+    console.log("Game Loop!");
+    loop = setInterval(() => {
+        update();
+    }, 1000/fps);
+};
+
+function update(){
+    console.log("Updating");
+}
