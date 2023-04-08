@@ -91,22 +91,9 @@ function checkCell(id) {
 
 function searchForShip(row, col){
     let shipFound = false;
-    for(var i = 0; i<computerShipPositions.length; i++){
-        currentShip = computerShipPositions[i];
-        for(var j = 0; j<currentShip.positions.length; j++){
-            position = currentShip.positions[j];
-            if(position.col === col && position.row === row){
-                shipFound = true;
-                computerShipPositions[i].size--;
-                console.log(computerShipPositions[i]);
-            }
-        }
-        if(shipFound){
-            if(currentShip.size < 1)
-                computerShips = computerShips - 1;
-            break;
-        }
-    }
+    cell = computerGrid[row][col];
+    computerShipPositions[cell.shipId].size--;
+    if(computerShipPositions[cell.shipId].size < 1) computerShips--;
 }
 
 function onPlayerTouch(id) {
@@ -125,6 +112,7 @@ function initialize() {
 //Start of the Game Loop
 startButton.addEventListener('click', function () {
     initialize();
+    startButton.hidden = true;
     playerShipPositions = placeShips(playerGrid);
     computerShipPositions = placeShips(computerGrid);
     loop = setInterval(() => {
@@ -162,14 +150,14 @@ function computerMove() {
             document.getElementById(cell.id).textContent = 'O';
 
         }
-        console.log('Computer made a move');
     }
 }
 
 
 function placeShips(grid) {
     const size = grid.length;
-    const placedShips = [];
+    // const placedShips = [];
+    const placedShips = {};
 
 
     // Loop through each ship
@@ -183,6 +171,7 @@ function placeShips(grid) {
             const col = Math.floor(Math.random() * size);
             const direction = directions[Math.floor(Math.random() * directions.length)];
             const shipSize = ships[i];
+            const id = Date.now().toString(36) + Math.random().toString(36).substr(2);
 
             // Verify that no ship overlaps
             let positions = [];
@@ -203,13 +192,15 @@ function placeShips(grid) {
             // If the ship can be placed, add it to the grid and placedShips array
             if (canPlace) {
                 ship = { size: shipSize, positions: positions, direction: direction };
-                placedShips.push(ship);
+                // placedShips.push(ship);
+                placedShips[id] = ship;
 
                 for (let j = 0; j < shipSize; j++) {
                     let rowShift = direction === 'vertical' ? j : 0;
                     let colShift = direction === 'horizontal' ? j : 0;
                     grid[row + rowShift][col + colShift].isShip = true;
                     grid[row + rowShift][col + colShift].ship = ship;
+                    grid[row + rowShift][col + colShift].shipId = id;
                 }
 
                 shipPlaced = true;
